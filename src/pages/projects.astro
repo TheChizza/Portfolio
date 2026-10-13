@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+// Edit this list to add or change projects.
+const projects = [
+  { title: 'The Mental Youth', description: 'Placeholder: describe this project.', href: 'https://thementalyouth.com' },
+  { title: 'Project two', description: 'Placeholder: describe this project.' },
+];
+---
+<Base title="Projects · Chiu">
+  <h1>Projects</h1>
+  {projects.map((p) => <ProjectCard {...p} />)}
+</Base>

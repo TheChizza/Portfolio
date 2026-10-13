@@ -1,0 +1,50 @@
+---
+const { title = 'Chiu', description = 'Portfolio' } = Astro.props;
+const path = Astro.url.pathname;
+const links = [
+  { href: '/', label: 'About' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <a class="name" href="/">Chiu</a>
+      <nav>
+        {links.map((l) => (
+          <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a>
+        ))}
+      </nav>
+    </header>
+    <main><slot /></main>
+    <footer>© {new Date().getFullYear()} Chiu</footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #fbfaf8; --text: #1c1b1a; --muted: #6b6762; --accent: #c2410c; --line: #e7e3dd;
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #141312; --text: #ece9e4; --muted: #a29d96; --accent: #fb923c; --line: #2b2926; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0 auto; max-width: 44rem; padding: 2rem 1rem 4rem; background: var(--bg); color: var(--text); line-height: 1.6; }
+  header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .name { font-weight: 700; font-size: 1.15rem; color: var(--text); text-decoration: none; }
+  nav { display: flex; gap: 1.25rem; }
+  nav a { color: var(--muted); text-decoration: none; }
+  nav a[aria-current='page'], nav a:hover { color: var(--accent); }
+  a { color: var(--accent); }
+  h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 1rem; }
+  footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+</style>
